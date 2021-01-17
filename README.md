@@ -1,16 +1,11 @@
 # flutter_firebase_architecture
 
-A new Flutter application.
+Layer architecture for flutter app.
 
-## Getting Started
+- Based of: [Starter Architecture for Flutter & Firebase Apps using Riverpod](https://codewithandrea.com/videos/starter-architecture-flutter-firebase/)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Architecture Layers
+Data, Domain and UI layer with unidirectional data flow.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot](architecture.jpg)
