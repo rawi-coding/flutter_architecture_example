@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_architecture/data/entities/friend.dart';
 import 'package:flutter_firebase_architecture/domain/providers/providers.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 
-class FriendsScreen extends ConsumerWidget {
+class FriendsScreen extends HookWidget {
   static const String routeName = 'friends';
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Friends'),
@@ -19,7 +20,7 @@ class FriendsScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: _buildContent(watch),
+      body: _buildContent(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.add),
@@ -27,8 +28,8 @@ class FriendsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildContent(ScopedReader watch) {
-    AsyncValue<List<Friend>> friends = watch(friendsStreamProvider);
+  Widget _buildContent() {
+    AsyncValue<List<Friend>> friends = useProvider(friendsStreamProvider);
     return friends.when(
       loading: () => const CircularProgressIndicator(),
       error: (error, stack) => const Text('Oops'),

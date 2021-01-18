@@ -3,13 +3,14 @@ import 'package:flutter_firebase_architecture/data/entities/event.dart';
 import 'package:flutter_firebase_architecture/domain/providers/providers.dart';
 import 'package:flutter_firebase_architecture/domain/service/date_service.dart';
 import 'package:flutter_firebase_architecture/ui/screens/friends_screen.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 
-class EventsScreen extends ConsumerWidget {
+class EventsScreen extends HookWidget {
   static const String routeName = 'events';
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Events'),
@@ -21,7 +22,7 @@ class EventsScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: _buildContent(watch),
+      body: _buildContent(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.add),
@@ -29,8 +30,8 @@ class EventsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildContent(ScopedReader watch) {
-    AsyncValue<List<Event>> events = watch(eventsStreamProvider);
+  Widget _buildContent() {
+    AsyncValue<List<Event>> events = useProvider(eventsStreamProvider);
     return events.when(
       loading: () => const CircularProgressIndicator(),
       error: (error, stack) => const Text('Oops'),
